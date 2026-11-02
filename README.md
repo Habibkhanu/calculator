@@ -10,16 +10,12 @@ Run: ./run.sh
 Enter the first number, operator (+ - * /), then second number.
 The program prints Result: followed by the answer.
 
-## Requirements.md contents
-adds 2 numbers together
-substracts 2 numbers
-multiply 2 numbers
-divide 2 numbers if the number being divided is not being divided by the number zero
-display answer on the screen
-
-calculation for substraction and addition is complete when it displays correct asnwers
-calcualtion for multiplicatiooon and division is correct when displays correct answers from correct input
-
-examples:
-add 5 and 4 = 9
-divide 10 by 5 = 2
+## How to check it
+Run: ./check.sh
+should pass all 5 tests.
+Run: echo $?
+should give the input 0 to show that the tests succeeded.
+1 means some tests failed; 5 means no tests were collected. 
+Other non-zero
+statuses can indicate setup or tool errors. 
+Run it immediately after pytest, because another command replaces the stored status.
