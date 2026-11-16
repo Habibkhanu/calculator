@@ -21,4 +21,4 @@ def test_divide_uneven():
     assert result == 2.5
 
 def test_CircleArea():
-    asser CircleArea(-4) == "Error"
+    assert CircleArea(-4) == "Error"
