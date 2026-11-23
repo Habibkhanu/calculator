@@ -1,4 +1,6 @@
 from calculator import add, subtract, multiply, divide, CircleArea
+from batch_calculator import process_calculation
+
 
 def test_add():
 	assert add(2, 3) == 5
@@ -22,3 +24,6 @@ def test_divide_uneven():
 
 def test_CircleArea():
     assert CircleArea(-4) == "Error"
+        
+def test_divide_by_zero_returns_error():
+	assert process_calculation("divide", "7", "0") == ("ERROR", "", "DIVISION_BY_ZERO")
