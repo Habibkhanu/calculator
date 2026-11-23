@@ -18,8 +18,15 @@ submit the final CI run as a separate PDF or screenshot.
 
 - Starting commit: 47cbfbca5c1c27e411118a386894ca76dbfaa7c9
 - Reused lab files, tests and examples: calculator.py, check.sh, run.sh, README.md, REQUIREMENTS.md, test_calculator.py
-- Feature branch and PR: [name, URL and saved PR file in evidence/]
-- Self-review: [what you checked in the diff and the outcome]
+- Feature branch and PR:
+  
+  Feature Branch: batch-calculator
+
+Pull Request Name: Add batch calculator
+
+Pull Request URL: https://github.com/Habibkhanu/calculator/compare/batch-calculator?expand=1
+
+- Self-review: added a new condition called DIVISION_BY_ZERO
 
 ## 2. Test failure, diagnosis and fix
 
@@ -38,7 +45,7 @@ missing feature is acceptable; retain the test in the final suite.
 
 - Common check script: [path and invocation used locally and in CI]
 - Prerequisites and hook installation: 
-mkdir -p hooks,
+  mkdir -p hooks,
 nano hooks/pre-commit,
 "#!/bin/bash",
 ./chech.sh,
