@@ -16,7 +16,7 @@ submit the final CI run as a separate PDF or screenshot.
 
 ## 1. Starting point and Git review
 
-- Starting commit: 47cbfbca5c1c27e411118a386894ca76dbfaa7c9
+- Starting commit: b23b85398f0930e9f573f411c6c238e67770f18e
 - Reused lab files, tests and examples: calculator.py, check.sh, run.sh, README.md, REQUIREMENTS.md, test_calculator.py
 - Feature branch and PR: [name, URL and saved PR file in evidence/]
 - Self-review: [what you checked in the diff and the outcome]
