@@ -1,0 +1,7 @@
+Stage 2 - Failing CI Test
+
+GitHub Actions URL:
+https://github.com/Habibkhanu/calculator/actions/runs/45630353074/job/139261538175
+
+Expected result: The pytest test should fail because the calculator does not yet handle the missing requirement correctly.
+
