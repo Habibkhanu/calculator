@@ -18,7 +18,7 @@ submit the final CI run as a separate PDF or screenshot.
 
 - Starting commit: b23b85398f0930e9f573f411c6c238e67770f18e
 - Reused lab files, tests and examples: calculator.py, check.sh, run.sh, README.md, REQUIREMENTS.md, test_calculator.py
-- Feature branch and PR: [name, URL and saved PR file in evidence/]
+- Feature branch and PR: [coursework, URL and saved PR file in evidence/]
 - Self-review: [what you checked in the diff and the outcome]
 
 ## 2. Test failure, diagnosis and fix
