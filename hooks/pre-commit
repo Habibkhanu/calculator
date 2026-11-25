@@ -1,3 +1,5 @@
 #!/bin/bash
 ./check.sh
-exit $?
+result=$?
+echo "Pre-commit exit code: $result"
+exit "$result"
