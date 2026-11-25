@@ -1,0 +1,29 @@
+=== Calculator quality gate ===
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-6.2.5, py-1.10.0, pluggy-0.13.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/khanhu2/h-drive/calculator
+collecting ... collected 19 items
+
+test_calculator.py::test_add PASSED                                      [  5%]
+test_calculator.py::test_divide PASSED                                   [ 10%]
+test_calculator.py::test_multiply PASSED                                 [ 15%]
+test_calculator.py::test_subtract PASSED                                 [ 21%]
+test_calculator.py::test_divide_uneven PASSED                            [ 26%]
+test_calculator.py::test_CircleArea PASSED                               [ 31%]
+test_calculator.py::test_Add_two_numbers PASSED                          [ 36%]
+test_calculator.py::test_Subtract_two_numbers PASSED                     [ 42%]
+test_calculator.py::test_Multiply_two_numbers PASSED                     [ 47%]
+test_calculator.py::test_divide_two_numbers PASSED                       [ 52%]
+test_calculator.py::test_Divide_by_zero_returns_error PASSED             [ 57%]
+test_calculator.py::test_Unknown_operation PASSED                        [ 63%]
+test_calculator.py::test_Whitespaces PASSED                              [ 68%]
+test_calculator.py::test_calculaticon_with_decimals PASSED               [ 73%]
+test_calculator.py::test_Negative_number PASSED                          [ 78%]
+test_calculator.py::test_Invalid_number PASSED                           [ 84%]
+test_calculator.py::test_Empty_operand PASSED                            [ 89%]
+test_calculator.py::test_Unknown_operation_has_priority PASSED           [ 94%]
+test_calculator.py::test_Invalid_number_has_priority_over_division_by_zero PASSED [100%]
+
+============================== 19 passed in 0.06s ==============================
+QUALITY GATE PASSED

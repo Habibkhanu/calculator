@@ -18,8 +18,11 @@ submit the final CI run as a separate PDF or screenshot.
 
 - Starting commit: b23b85398f0930e9f573f411c6c238e67770f18e
 - Reused lab files, tests and examples: calculator.py, check.sh, run.sh, README.md, REQUIREMENTS.md, test_calculator.py
-- Feature branch and PR: [coursework, URL and saved PR file in evidence/]
-- Self-review: [what you checked in the diff and the outcome]
+- Feature branch and PR: [coursework, https://github.com/Habibkhanu/calculator/actions/runs/45630353074/job/139261538175 and saved PR file in evidence/CI-fail.png]
+- Self-review: I added the division-by-zero function to test_calculator.py but had not yet written an actual test to check that it worked. I identified this during my review of the pull request. The rest of the changes looked correct.
+
+Review outcome: I identified that a test for division by zero was still needed.
+
 
 ## 2. Test failure, diagnosis and fix
 
@@ -36,23 +39,48 @@ missing feature is acceptable; retain the test in the final suite.
 
 ## 3. Repeatable checks and local hook
 
-- Common check script: [path and invocation used locally and in CI]
+- Common check script: The check script is saved as check.sh in the main project folder. I run it locally using ./check.sh. The same script is used in GitHub Actions CI.
 - Prerequisites and hook installation: 
-mkdir -p hooks,
-nano hooks/pre-commit,
-"#!/bin/bash",
-./chech.sh,
-chmod +x hooks/pre-commit,
-cp hooks/pre-commit .git/hooks/pre-commit,
-chmod +x .git/hooks/pre-commit,
-git add hooks/pre-commit,
-git commit -m "Add tracked pre-commit hook",
-- Blocked commit attempt: [short transcript, base commit and working-tree state]
-- Permitted commit after the fix: [short transcript and resulting hash]
-- Hook limitations and independent CI checks: [your explanation]
+Python 3 and pytest are required to run the tests.
 
-The hook may use the same failure case as section 2 or another case. A blocked
-commit attempt has no new commit hash; identify its base commit and changes.
+I created a hooks folder and made a pre-commit file inside it. I used Nano to write the hook script, which runs ./check.sh and displays its exit code.
+
+I then made both scripts executable and configured Git to use my hooks folder.
+
+The commands I used were:
+
+mkdir -p hooks
+nano hooks/pre-commit
+isnide the pre-commit i sued the following commands:
+
+#!/bin/bash
+./check.sh
+result=$?
+echo "Pre-commit exit code: $result"
+exit "$result"
+
+thenn i changed the file to make it executable:
+chmod +x check.sh hooks/pre-commit
+git config core.hooksPath hooks
+git add hooks/pre-commit
+
+This allows Git to run the pre-commit hook automatically before each commit. The hook file is also tracked in the repository.
+
+- Blocked commit attempt: I made a test fail and attempted to commit. The pre-commit hook ran the tests and blocked the commit because a test failed.
+
+Base commit hash: 684c167abef5dc652c8f59510fa46fc36b1aac42
+
+The changes were still uncommitted after the failed attempt.
+
+Evidence: evidence/hook-fail.txt
+
+- Permitted commit after the fix: I fixed the failing test and attempted the commit again. All tests passed, so the hook allowed the commit.
+
+New commit hash: b6091437d0931ebade2eeeffccda19ecae13c2a4
+
+Evidence : evidence/hook-pass.txt
+
+- Hook limitations and independent CI checks: The hook helps find errors before committing. However, it can be bypassed using git commit --no-verify. It also needs to be installed on each fresh checkout. GitHub Actions CI runs the same check script independently to make sure the tests are still checked even if the hook is bypassed.
 
 ## 4. Native and container batch runs
 
