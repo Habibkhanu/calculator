@@ -1,0 +1,7 @@
+**Passing CI Test Evidence**
+
+GitHub Actions URL: https://github.com/Habibkhanu/calculator/actions/runs/45717809179/job/139568281383
+
+**Result:** Passed
+
+**Details:** The GitHub Actions workflow completed successfully. The `pytest` test step passed, confirming that the calculator tests are passing.
