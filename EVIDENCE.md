@@ -29,13 +29,25 @@ Review outcome: I identified that a test for division by zero was still needed.
 Plan this before fixing the chosen missing requirement or defect. An initially
 missing feature is acceptable; retain the test in the final suite.
 
-- Requirement and retained test: [R number, test file/function]
-- Expected result and actual failure: [your explanation]
-- Before/fix commits: [hashes]
-- Failing/passing local runs: [commands, outcomes and saved log paths]
-- Failing/passing CI runs: [URLs, matching commit hashes and saved files in evidence/]
-- CI diagnosis: [event, runner, job, failed step and useful log message]
-- Cause and implementation fix: [explain what changed and why]
+- Requirement and retained test: R2, The calculator must handle errors correctly, including division by zero.
+
+The test checks that dividing a number by zero returns the error code DIVISION_BY_ZERO. The test is included in test_calculator.py.
+- Expected result and actual failure: 
+When dividing 7 by 0, the calculator should return:
+("ERROR", "", "DIVISION_BY_ZERO")
+The test failed because the calculator did not correctly handle division by zero.
+After implementing the division-by-zero check, the same test passed.
+- Before/fix commits: before(5cb60e17a0bdafdf49cb29f904d9626f691b97d0), after(1027a900207b277621d144a9bfd140452ca16b4d)
+- Failing/passing local runs: ./check.sh, evidence/local-before.txt and evidence/local-after.txt
+- Failing/passing CI runs:
+failing url: https://github.com/Habibkhanu/calculator/actions/runs/45630353074/job/139261538175
+failing hash: 5cb60e17a0bdafdf49cb29f904d9626f691b97d0
+failing evidence: evidence/CI-fail.png
+passing url: https://github.com/Habibkhanu/calculator/actions/runs/45717809179/job/139568281383
+passing hash: 1027a900207b277621d144a9bfd140452ca16b4d
+passing evidence: evidence/CI-pass.png
+- CI diagnosis: The workflow was triggered by a pull request and ran on a GitHub-hosted Ubuntu runner. The division by zero job failed during the pull request step, which ran the CI pytest tests. The useful log message was: “FAILED test_calculator.py::test_divide_by_zero_returns_error - NotImplementedError: Complete process_calculation for the coursework". This showed that the division-by-zero test had failed because the calculator did not return the expected error code.
+- Cause and implementation fix: The cause of the failure was that the process_calculation function had not yet been implemented and was raising a NotImplementedError. I fixed this by implementing the function to handle the four arithmetic operations, validate the input numbers and return the correct error codes. I also added a check for division by zero so that it returns DIVISION_BY_ZERO instead of causing an unhandled error. After implementing the function, I ran the tests again and they passed.
 
 ## 3. Repeatable checks and local hook
 
@@ -84,7 +96,46 @@ Evidence : evidence/hook-pass.txt
 
 ## 4. Native and container batch runs
 
-- Native normal/mixed runs: [commands and saved output/diagnostic paths]
+- Native normal/mixed runs: 
+Native Batch Runs
+
+I ran the batch processor from the repository root using the normal and mixed CSV files.
+
+Normal CSV run
+
+Command used:
+
+python3 batch_runner.py data/normal.csv results.csv
+
+Output:
+
+Processed 6 records: 6 succeeded, 0 failed.
+
+The normal CSV file processed all 6 records successfully. The output was saved in results.csv.
+
+Mixed CSV run
+
+Command used:
+
+python3 batch_runner.py data/mixed.csv mixed-results.csv
+
+Output:
+
+Record 2: DIVISION_BY_ZERO
+Record 4: UNKNOWN_OPERATION
+Record 5: INVALID_NUMBER
+Record 8: INVALID_NUMBER
+Processed 8 records: 4 succeeded, 4 failed.
+
+The mixed CSV file contained both valid and invalid calculations. Four records succeeded and four returned errors. The batch processor continued processing after errors, allowing later valid records to be completed.
+
+The following evidence files were saved:
+
+evidence/normal-run.txt
+evidence/mixed-run.txt
+evidence/normal-results.csv
+evidence/mixed-results.csv
+
 - Container build/run commands and image tag: [README reference or commands]
 - Input/output transfer: [how files enter and leave the container]
 - Mixed-run interpretation: [summary, one error and later successful records]
