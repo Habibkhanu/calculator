@@ -1,6 +1,7 @@
-FROM docker.io/library/python:3.11-slim
+FROM python:3.10-slim
 WORKDIR /app
 COPY calculator.py .
-COPY math_exam.py .
-COPY exam.uraz .
-CMD ["python", "math_exam.py"]
+COPY batch_calculator.py .
+COPY batch_runner.py .
+COPY data/ ./data/
+ENTRYPOINT ["python", "batch_runner.py"]
