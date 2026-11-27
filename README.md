@@ -83,6 +83,42 @@ git config core.hooksPath hooks
 
 The hook runs ./check.sh, displays the exit code and prevents a commit if the checks fail.
 
+# Containerisation
+
+The calculator was packaged into a container using a Dockerfile based on the `python:3.10-slim` image.
+
+**Build the image:**
+
+```bash
+docker build -t calculator .
+```
+
+**Run the normal CSV file:**
+
+docker run --rm -v "$PWD/results:/app/results" calculator data/normal.csv results/normal-results.csv
+
+**Run the mixed CSV file:**
+
+docker run --rm -v "$PWD/results:/app/results" calculator data/mixed.csv results/mixed-results.csv
+
+
+**Explanation of the commands:**
+
+- `docker run` starts a container from the calculator image.
+- `--rm` removes the container after it finishes running.
+- `-v` connects the local `results` directory to the container's `/app/results` directory. This allows the output files to remain on the host machine.
+- `data/normal.csv` and `data/mixed.csv` are the input files.
+- The final argument specifies where each output CSV file is saved.
+
+**Test results:**
+
+- Normal CSV: 6 records processed successfully.
+- Mixed CSV: 8 records processed, with 4 successful calculations and 4 errors correctly identified.
+
+**Environment:**
+- Operating system: Ubuntu 24.04
+- Python base image: `python:3.10-slim`
+- Container engine: Podman 4.9.3 
 
 # Evidence
 
